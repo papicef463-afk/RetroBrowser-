@@ -11,12 +11,12 @@
 html, body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 body {
     font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
     background: #008080;
-    overflow: hidden;
 }
 
 h1, h2, h3 {
@@ -42,6 +42,11 @@ input[type="url"] {
     justify-content: center;
 }
 
+#pageContent {
+    width: 100%;
+    height: 100%;
+}
+
 @media (max-width: 1024px) {
     .browser-toolbar {
         overflow-x: auto;
@@ -62,16 +67,22 @@ input[type="url"] {
         flex-wrap: wrap;
     }
     
-    .year-selector {
-        flex-direction: column;
-        align-items: stretch;
+    .world-clock-panel {
+        max-height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .browser-toolbar {
+        flex-wrap: wrap;
     }
     
-    .slider {
+    .address-bar {
         width: 100%;
+        margin-bottom: 5px;
     }
     
-    .archive-grid {
-        grid-template-columns: 1fr;
+    .titlebar-text {
+        font-size: 10px;
     }
 }
