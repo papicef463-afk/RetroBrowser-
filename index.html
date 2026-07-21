@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroBrowser - Web Time Machine (1996-2026)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="retro-styles.css">
+</head>
+<body>
+    <!-- Retro Browser Interface -->
+    <div class="browser-window">
+        <!-- Title Bar -->
+        <div class="browser-titlebar">
+            <div class="titlebar-buttons">
+                <button class="titlebar-btn minimize" aria-label="Minimize"></button>
+                <button class="titlebar-btn maximize" aria-label="Maximize"></button>
+                <button class="titlebar-btn close" aria-label="Close"></button>
+            </div>
+            <div class="titlebar-text">RetroBrowser - Web Time Machine</div>
+        </div>
+
+        <!-- Menu Bar -->
+        <div class="browser-menubar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Go</div>
+            <div class="menu-item">Help</div>
+        </div>
+
+        <!-- Navigation Toolbar -->
+        <div class="browser-toolbar">
+            <button class="nav-btn" id="backBtn" title="Back">◀</button>
+            <button class="nav-btn" id="forwardBtn" title="Forward">▶</button>
+            <button class="nav-btn" id="reloadBtn" title="Reload">⟳</button>
+            <button class="nav-btn" id="stopBtn" title="Stop">⊗</button>
+            <input type="text" class="address-bar" id="addressBar" placeholder="http://example.com" value="http://www.example.com">
+            <button class="nav-btn" id="goBtn" title="Go">Go</button>
+        </div>
+
+        <!-- Year Archive Navigation -->
+        <div class="year-selector">
+            <label for="yearSlider">Select Year:</label>
+            <input type="range" id="yearSlider" min="1996" max="2026" value="2024" class="slider">
+            <span id="yearDisplay" class="year-display">2024</span>
+        </div>
+
+        <!-- Archive Timeline -->
+        <div class="timeline-container">
+            <div class="timeline" id="timeline"></div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="browser-content">
+            <div class="status-bar">
+                <span id="statusText">Ready</span>
+            </div>
+            
+            <div class="content-viewport">
+                <div class="page-content" id="pageContent">
+                    <!-- Archive cards will be inserted here -->
+                    <div class="archive-grid" id="archiveGrid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Statusbar -->
+        <div class="browser-statusbar">
+            <span id="pageInfo">Document: Done - 0 Bytes</span>
+        </div>
+    </div>
+
+    <!-- Modal for year details -->
+    <div class="modal" id="yearModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
