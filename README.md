@@ -1,214 +1,180 @@
-# RetroBrowser - Mobile Web App
-## Retro Browser with Year Archive (1996-2026)
+# RetroBrowser - Real Web Browser with Retro UI
+## Live Web Browsing in a Windows 95/98 Interface
 
-A nostalgic web application that takes you back in time through internet history! Browse through different eras of the web, from the early days of HTML in 1996 to the AI-powered web of 2024 and beyond to 2026.
+A fully functional web browser with an authentic retro Windows 95/98 aesthetic that lets you browse the **real, live web** with nostalgic styling.
 
-### 🎮 Features
+### ✨ Features
 
-#### Core Features
-- **Time Travel Browser**: Browse web history from 1996 to 2026
-- **Year Archive**: View key events, technologies, and websites for each year
-- **Retro UI**: Authentic Windows 95/98 aesthetic
-- **Flash Player v3.2**: Full Flash SWF content support with Ruffle emulator
-- **Mobile Responsive**: Works on all devices and screen sizes
-- **Plugin System**: Extensible plugin architecture
+#### Real Web Browsing
+- **Live URL Navigation**: Browse any website on the internet
+- **Full History**: Back/Forward navigation with complete history tracking
+- **Reload & Stop**: Full page reload and stop loading controls
+- **Address Bar**: Enter any URL and navigate instantly
+- **Error Handling**: Graceful error messages for failed connections
+- **Status Bar**: Real-time loading status updates
 
-#### Year Archives Include
-- **1996**: The Dawn of Web - HTML 3.2, CSS, JavaScript, Flash
-- **2000**: Y2K Millennium - Dot-com boom era
-- **2005**: Web 2.0 Dawn - AJAX, YouTube, Flickr
-- **2010**: Mobile Revolution - iPad, iPhone 4, Instagram
-- **2015**: Cloud & Mobile - ES6, PWA, Cloud services
-- **2020**: Pandemic Era - COVID-19, Video conferencing
-- **2024**: AI & Modern Web - ChatGPT, AI assistants
-- **2026**: Future Web - AR/VR, Web4, Quantum computing
+#### Retro Windows 95/98 UI
+- **Authentic Styling**: Genuine Windows 95/98 window chrome
+- **Title Bar**: Minimize, maximize, close buttons
+- **Menu Bar**: Classic menu structure
+- **Toolbar**: Navigation buttons with retro styling
+- **Status Bar**: Real-time page information
 
-### 📁 Project Structure
+#### Live World Clock
+- **12 Time Zones**: Shows current time in major cities worldwide
+- **Real-time Updates**: Live clock that updates every second
+- **Digital Display**: Retro 7-segment display styling
+- **Interactive Modal**: Click any clock for enlarged view
+- **Time Zone Conversion**: See all zones with time differences
 
+### 🚀 Quick Start
+
+1. **Open the App**
+   - Open `index.html` in any modern browser
+   - Browser will load with example.com as homepage
+
+2. **Browse Websites**
+   - Type URL in address bar (e.g., `google.com`, `github.com`)
+   - Press Enter or click "Go"
+   - Use Back/Forward buttons to navigate history
+   - Click "Reload" to refresh page
+
+3. **View World Clock**
+   - See current time in 12 major time zones at top
+   - Click any clock for enlarged view with all zones
+   - Times update in real-time every second
+
+### 🔧 How It Works
+
+#### Real Browser Engine
+- Uses **iframe** for actual web content rendering
+- Direct HTTP/HTTPS requests to live websites
+- Full history stack with back/forward navigation
+- Real page load events and error handling
+
+#### Architecture
 ```
-RetroBrowser-/
-├── index.html                      # Main app entry point
-├── app.js                          # Main application logic
-├── data.js                         # Historical archive data
-├── styles.css                      # Main styles
-├── retro-styles.css               # Retro Windows 95/98 theme
-├── plugins/
-│   ├── plugin-manager.js          # Plugin system manager
-│   ├── plugin-registry.js         # Plugin registry & configuration
-│   ├── plugin-loader.js           # Dynamic plugin loader
-│   ├── plugin-manager.html        # Plugin management UI
-│   ├── flash-player-v3.2.js       # Flash Player plugin
-│   ├── flash-player-panel.js      # Flash Player controls
-│   ├── flash-player-demo.html     # Flash Player demo
-│   └── FLASH_PLAYER_V3.2.md      # Flash Player docs
-└── README.md                       # This file
-```
-
-### 🚀 Getting Started
-
-#### Local Setup
-1. Clone the repository
-2. Open `index.html` in a modern web browser
-3. Use the year slider to navigate through web history
-4. Click on websites to view more information
-
-#### Remote Setup
-1. Deploy to GitHub Pages or any web hosting
-2. Access via `https://username.github.io/RetroBrowser-`
-3. Works on mobile devices via responsive design
-
-### 💻 Usage
-
-#### Navigating the Archive
-- **Year Slider**: Drag to select year (1996-2026)
-- **Timeline**: Click on year markers for quick navigation
-- **Address Bar**: Standard browser navigation
-- **Back/Forward**: Browser history navigation
-
-#### Using Flash Player
-1. Open `plugins/flash-player-demo.html` in browser
-2. Enter a SWF file URL in the input field
-3. Click "Load" to play Flash content
-4. Use playback controls:
-   - **▶ Play**: Start playback
-   - **⏸ Pause**: Pause playback
-   - **⏹ Stop**: Stop playback
-   - **⛶ Fullscreen**: Enter fullscreen mode
-5. Adjust volume with the slider
-
-#### Plugin Management
-1. Open `plugins/plugin-manager.html`
-2. View list of available plugins
-3. Click "Load All Plugins" to initialize
-4. Manage individual plugins as needed
-
-### 🔌 Flash Player v3.2 API
-
-#### Basic Usage
-```javascript
-// Load a Flash file
-const player = window.FlashPlayerPlugin.loadFlash('game.swf', {
-    width: '800px',
-    height: '600px',
-    autoplay: true
-});
-
-// Add to page
-document.getElementById('container').appendChild(player);
-
-// Control playback
-window.FlashPlayerPlugin.play(player.id);
-window.FlashPlayerPlugin.pause(player.id);
-window.FlashPlayerPlugin.setVolume(player.id, 0.8);
+index.html           - Main UI structure
+real-browser.js      - Browser navigation logic
+world-clock.js       - Time zone display system
+retro-styles.css     - Windows 95/98 styling
+clock.css           - Digital clock styling
 ```
 
-#### API Methods
-- `loadFlash(url, options)` - Create Flash player
-- `createPlayer(containerId, url, options)` - Add to container
-- `play(playerId)` - Start playback
-- `pause(playerId)` - Pause playback
-- `stop(playerId)` - Stop playback
-- `setVolume(playerId, value)` - Set volume (0-1)
-- `toggleFullscreen(playerId)` - Fullscreen mode
-- `processFlashContent()` - Auto-replace Flash on page
-- `dispose(playerId)` - Remove player
-- `getInfo()` - Get plugin information
+### 📋 Supported Features
 
-See `plugins/FLASH_PLAYER_V3.2.md` for full documentation.
+✅ Navigate to any website
+✅ Back/Forward history navigation
+✅ Reload current page
+✅ Stop page loading
+✅ Full URL support (HTTP/HTTPS)
+✅ Real-time status updates
+✅ 12 world time zones with live updates
+✅ Enlarged clock view with time zone list
+✅ Mobile responsive design
+✅ Cross-browser compatible
+
+### ⚠️ Limitations
+
+- **CORS Restrictions**: Some sites may not load due to CORS policies
+- **Cross-Origin Content**: Mixed content warnings on some sites
+- **Third-party Embeds**: Some embedded content may not work
+- **Iframe Sandbox**: Limited access to page internals
+- **Mobile Sites**: Some mobile-optimized sites may not display perfectly
+
+### 🌐 Recommended Sites to Test
+
+- `https://example.com` - Simple test page
+- `https://google.com` - Search engine
+- `https://github.com` - Developer platform
+- `https://wikipedia.org` - Encyclopedia
+- `https://hacker-news.firebaseapp.com` - News aggregator
+- `https://oldschool.runescape.com` - Legacy gaming
+- `https://www.html5zombies.com` - Retro gaming
+- `https://98.js.org` - Windows 98 emulator (meta!)
 
 ### 🎨 Customization
 
-#### Changing the Theme
-Edit `retro-styles.css` to modify:
-- Colors and gradients
-- Window borders and buttons
-- Font styles
-- Timeline appearance
-
-#### Adding New Years
-Edit `data.js` to add new year entries:
+#### Change Homepage
+Edit `real-browser.js`:
 ```javascript
-2027: {
-    year: 2027,
-    title: "Year Title",
-    description: "Description of the era",
-    events: [...],
-    websites: [...],
-    technologies: [...],
-    bandwidth: "Technology specs",
-    browsers: ["Browser list"]
-}
+this.currentURL = 'https://your-site.com';
 ```
 
-### 📱 Mobile Optimization
+#### Add More Time Zones
+Edit `world-clock.js` timezones array:
+```javascript
+this.timezones = [
+    { name: 'EST', offset: -5, city: 'New York' },
+    // Add more...
+];
+```
 
-- Responsive grid layout
+#### Modify Retro Styling
+Edit `retro-styles.css` to change:
+- Window colors and borders
+- Button styles
+- Font sizes and families
+- Overall aesthetic
+
+### 📱 Mobile Support
+
+- Responsive design works on all devices
 - Touch-friendly controls
-- Mobile-first design
-- Fast load times
-- Optimized assets
+- Optimized for small screens
+- Full functionality on mobile browsers
 
-### 🔧 Browser Support
+### 🔒 Security Notes
 
-- Chrome/Edge 60+
-- Firefox 55+
-- Safari 11+
-- Opera 47+
-- Mobile browsers (iOS Safari, Chrome Mobile)
+- Sites with CORS restrictions won't load
+- HTTPS recommended for security
+- No site tracking or cookies between sessions
+- Content is loaded directly from servers
 
-### ⚡ Performance
+### 🐛 Troubleshooting
 
-- Minimal dependencies
-- Lazy loading for Flash Player
-- Optimized CSS and JavaScript
-- Efficient DOM manipulation
-- Mobile-optimized images
+**Page won't load:**
+- Check internet connection
+- Try adding `https://` prefix
+- Check if site has CORS protection
+- Try a different website
+
+**Time zones showing wrong:**
+- Check system time is correct
+- Zones use UTC offsets (may not account for DST)
+- Click clock for current timezone info
+
+**UI looks wrong:**
+- Clear browser cache (Ctrl+Shift+Del)
+- Disable browser extensions
+- Try a different browser
+
+### 💡 Tips
+
+- Bookmark your favorite sites by copying from address bar
+- Use browser history (Back button) frequently
+- Some retro websites work great: Oldweb.today, archive.org
+- Check console (F12) for error details
+
+### 🎯 Future Enhancements
+
+- [ ] Bookmarks system
+- [ ] Browser tabs
+- [ ] Search bar integration
+- [ ] Download manager
+- [ ] Screenshot tool
+- [ ] Custom time zones
+- [ ] Theme selector
+- [ ] Offline mode
 
 ### 📄 License
 
 MIT License - Free to use and modify
 
-### 🙏 Credits
+### 🎉 Enjoy!
 
-- **Ruffle**: Flash emulator (https://ruffle.rs)
-- **Internet Archive**: Inspiration for time-travel browsing
-- **Retro UI Design**: Windows 95/98 aesthetic
-
-### 🐛 Troubleshooting
-
-#### Flash Player not loading
-- Check browser console for errors
-- Verify CDN access to Ruffle
-- Ensure correct SWF file URL format
-
-#### Plugin not appearing
-- Clear browser cache
-- Check plugin-loader.js is loaded
-- Verify plugin files exist
-
-#### Performance issues
-- Reduce number of active Flash players
-- Disable autoplay for Flash content
-- Use modern browser for best performance
-
-### 📞 Support
-
-For issues, questions, or contributions:
-1. Check the documentation
-2. Review existing issues
-3. Create a new GitHub issue with details
-
-### 🔮 Future Enhancements
-
-- [ ] More historical years (1990s early years)
-- [ ] Real website screenshots
-- [ ] Sound and music from each era
-- [ ] Downloadable offline version
-- [ ] Additional plugins (PDF, Video, etc.)
-- [ ] User themes and customization
-- [ ] Multi-language support
-- [ ] API for adding custom archives
+Browse the real web with authentic retro style! Check the status bar and watch the world clock while you surf.
 
 ---
 
-**Made with ❤️ for web nostalgia lovers**
+**RetroBrowser - Where the past meets the present** 🕰️🌐
