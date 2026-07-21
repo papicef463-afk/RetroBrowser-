@@ -1,0 +1,207 @@
+/**
+ * Clock Styling - Digital Clock Display
+ * Retro 7-segment display inspired design
+ */
+
+.world-clock-panel {
+    background: #c0c0c0;
+    border-bottom: 2px outset #dfdfdf;
+    border-top: 1px solid #999;
+    padding: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.clock-title {
+    font-weight: bold;
+    font-size: 11px;
+    color: #000080;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+
+.clocks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.digital-clock {
+    background: #000;
+    border: 2px solid #004;
+    padding: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 130px;
+}
+
+.digital-clock:hover {
+    background: #001;
+    box-shadow: 0 0 8px rgba(0, 0, 255, 0.4);
+    transform: scale(1.02);
+}
+
+.clock-header {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.clock-time {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 2px 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #0f0;
+    line-height: 1.2;
+}
+
+.clock-time.pulse {
+    animation: clockPulse 0.5s ease-out;
+}
+
+@keyframes clockPulse {
+    0% { text-shadow: 0 0 5px #0f0; transform: scale(1); }
+    50% { text-shadow: 0 0 15px #0f0; transform: scale(1.05); }
+    100% { text-shadow: 0 0 5px #0f0; transform: scale(1); }
+}
+
+.clock-footer {
+    color: #0a0;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    text-align: center;
+    margin-top: 2px;
+    opacity: 0.8;
+}
+
+.time-status {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #000;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.digital-clock-modal {
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.enlarged-clock {
+    background: #000;
+    border: 3px solid #004;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.3) inset;
+}
+
+.large-time {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 72px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #0f0;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.large-ampm {
+    color: #0a0;
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.large-date {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.large-timezone {
+    color: #0a0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.timezone-list {
+    background: #c0c0c0;
+    border: 2px inset #dfdfdf;
+    overflow-y: auto;
+    max-height: 300px;
+    padding: 5px;
+    flex: 1;
+}
+
+.timezone-list h3 {
+    color: #000080;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.timezone-item {
+    background: #fff;
+    border: 1px solid #999;
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    display: grid;
+    grid-template-columns: 100px 60px 80px 1fr;
+    gap: 8px;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.timezone-item:hover {
+    background: #e0e0ff;
+    border-color: #4444aa;
+    transform: translateX(2px);
+}
+
+.timezone-item.active {
+    background: #e0e0ff;
+    border: 2px solid #0000ff;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.3);
+}
+
+.tz-name { font-weight: bold; color: #000080; }
+.tz-offset { color: #666; font-size: 10px; }
+.tz-time { font-family: 'Courier New', monospace; color: #000; font-weight: bold; }
+.tz-day { color: #666; text-align: right; }
+
+@media (max-width: 768px) {
+    .clocks-container { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+    .clock-time { font-size: 14px; }
+    .large-time { font-size: 48px; }
+}
+
+@media (max-width: 480px) {
+    .clocks-container { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
+    .clock-time { font-size: 12px; }
+    .large-time { font-size: 36px; }
+}
