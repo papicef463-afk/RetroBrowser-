@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Player v3.2 Demo - RetroBrowser</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            background: #c0c0c0;
+            padding: 20px;
+        }
+
+        .window {
+            background: #dfdfdf;
+            border: 2px outset #dfdfdf;
+            border-top-color: #ffffff;
+            border-left-color: #ffffff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            margin-bottom: 20px;
+        }
+
+        .titlebar {
+            background: linear-gradient(to right, #000080, #1084d7);
+            color: white;
+            padding: 2px 2px;
+            font-weight: bold;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 12px;
+            border-bottom: 1px solid #808080;
+            padding-bottom: 3px;
+        }
+
+        input[type="text"], input[type="url"], select {
+            width: 100%;
+            padding: 4px;
+            border: 2px inset #dfdfdf;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background: #c0c0c0;
+            border: 2px outset #dfdfdf;
+            border-top-color: #ffffff;
+            border-left-color: #ffffff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            padding: 4px 12px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            min-width: 60px;
+        }
+
+        button:active {
+            border-style: inset;
+            border-top-color: #808080;
+            border-left-color: #808080;
+            border-right-color: #dfdfdf;
+            border-bottom-color: #dfdfdf;
+        }
+
+        button:disabled {
+            color: #808080;
+            text-shadow: 1px 1px 0 #ffffff;
+            cursor: not-allowed;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .player-viewer {
+            background: #000;
+            border: 2px inset #dfdfdf;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .player-viewer.empty::before {
+            content: "Load a Flash file to display here";
+        }
+
+        .info-box {
+            background: #ffffff;
+            border: 1px inset #dfdfdf;
+            padding: 5px;
+            font-size: 10px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        .slider-container {
+            margin: 10px 0;
+        }
+
+        .slider-container label {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .control-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .control-buttons button {
+            padding: 8px 4px;
+            font-size: 10px;
+            width: 100%;
+        }
+
+        .example-list {
+            background: #ffffff;
+            border: 1px inset #dfdfdf;
+            padding: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 10px;
+        }
+
+        .example-item {
+            padding: 3px;
+            margin: 2px 0;
+            background: #c0c0c0;
+            border: 1px solid #999;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .example-item:hover {
+            background: #ddd;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-indicator.ready {
+            background: #00b000;
+        }
+
+        .status-indicator.loading {
+            background: #ffb900;
+        }
+
+        .status-indicator.error {
+            background: #ff0000;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Flash Player Control Window -->
+    <div class="window">
+        <div class="titlebar">
+            <span>🎬 Flash Player v3.2 - RetroBrowser</span>
+            <span style="font-size: 9px;">
+                <span class="status-indicator ready"></span>Ready
+            </span>
+        </div>
+        <div class="content">
+            <!-- URL Input Section -->
+            <div class="section">
+                <div class="section-title">Load Flash File</div>
+                <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                    <input type="url" id="flashUrl" placeholder="Enter Flash file URL (http://.../*.swf)" style="flex: 1;">
+                    <button onclick="loadFlash()" style="width: auto;">Load</button>
+                </div>
+            </div>
+
+            <!-- Player Viewer -->
+            <div class="section">
+                <div class="section-title">Player</div>
+                <div class="player-viewer empty" id="playerContainer"></div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="section">
+                <div class="section-title">Playback Controls</div>
+                <div class="control-buttons">
+                    <button onclick="playFlash()">▶ Play</button>
+                    <button onclick="pauseFlash()">⏸ Pause</button>
+                    <button onclick="stopFlash()">⏹ Stop</button>
+                    <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+                </div>
+            </div>
+
+            <!-- Volume Control -->
+            <div class="section">
+                <div class="slider-container">
+                    <label for="volumeSlider">Volume Control:</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="100" onchange="setVolume(this.value)">
+                    <span id="volumeDisplay" style="font-size: 10px;">100%</span>
+                </div>
+            </div>
+
+            <!-- Player Information -->
+            <div class="section">
+                <div class="section-title">Player Information</div>
+                <div class="info-box" id="playerInfo">No Flash file loaded</div>
+            </div>
+
+            <!-- Plugin Info -->
+            <div class="section">
+                <div class="section-title">Plugin Status</div>
+                <button onclick="showPluginInfo()" style="width: 100%; margin-bottom: 5px;">Show Plugin Info</button>
+                <div class="info-box" id="pluginStatus">
+                    Checking plugin status...
+                </div>
+            </div>
+
+            <!-- Page Processing -->
+            <div class="section">
+                <div class="section-title">Page Processing</div>
+                <button onclick="processPageFlash()" style="width: 100%; margin-bottom: 5px;">Process Flash on Page</button>
+                <button onclick="clearFlash()" style="width: 100%; margin-bottom: 5px;">Clear Player</button>
+            </div>
+
+            <!-- Example Flash Files -->
+            <div class="section">
+                <div class="section-title">Example Flash Files</div>
+                <div class="example-list">
+                    <div class="example-item" onclick="loadExampleFlash('https://example.com/sample.swf')">Sample Animation</div>
+                    <div class="example-item" onclick="loadExampleFlash('https://example.com/game.swf')">Flash Game</div>
+                    <div class="example-item" onclick="loadExampleFlash('https://example.com/animation.swf')">Animation Demo</div>
+                    <div class="example-item" onclick="loadExampleFlash('https://example.com/interactive.swf')">Interactive Content</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Window -->
+    <div class="window">
+        <div class="titlebar">
+            <span>⚙️ Settings</span>
+        </div>
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Display Settings</div>
+                <label style="font-size: 11px;">
+                    <input type="checkbox" id="autoplayCheckbox" checked> Autoplay
+                </label>
+                <label style="font-size: 11px;">
+                    <input type="checkbox" id="fullscreenCheckbox" checked> Allow Fullscreen
+                </label>
+                <label style="font-size: 11px;">
+                    <input type="checkbox" id="scriptAccessCheckbox" checked> Script Access
+                </label>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Background Color</div>
+                <input type="color" id="bgColorPicker" value="#000000" style="width: 100%; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="section">
+                <button onclick="applySettings()" style="width: 100%;">Apply Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./plugins/plugin-manager.js"></script>
+    <script src="./plugins/plugin-registry.js"></script>
+    <script src="./plugins/plugin-loader.js"></script>
+    <script src="./plugins/flash-player-v3.2.js"></script>
+    <script src="./plugins/flash-player-panel.js"></script>
+
+    <script>
+        let currentPlayerId = null;
+
+        function updatePluginStatus() {
+            if (window.FlashPlayerPlugin) {
+                const info = window.FlashPlayerPlugin.getInfo();
+                document.getElementById('pluginStatus').innerHTML = `
+                    <strong>Name:</strong> ${info.name} v${info.version}<br>
+                    <strong>Status:</strong> ${info.enabled ? 'Enabled' : 'Disabled'}<br>
+                    <strong>Ruffle:</strong> ${info.ruffleLoaded ? 'Loaded' : 'Loading...'}<br>
+                    <strong>Instances:</strong> ${info.activeInstances}<br>
+                    <strong>MIME Types:</strong> ${info.supportedMimes.length}
+                `;
+            }
+        }
+
+        function loadFlash() {
+            const url = document.getElementById('flashUrl').value.trim();
+            if (!url) {
+                alert('Please enter a Flash file URL');
+                return;
+            }
+
+            if (!window.FlashPlayerPlugin || !window.FlashPlayerPlugin.ruffleLoaded) {
+                alert('Flash Player plugin is not ready. Please wait...');
+                return;
+            }
+
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = '';
+            container.classList.remove('empty');
+
+            const player = window.FlashPlayerPlugin.loadFlash(url, {
+                width: '100%',
+                height: '400px',
+                autoplay: document.getElementById('autoplayCheckbox').checked,
+                allowFullscreen: document.getElementById('fullscreenCheckbox').checked
+            });
+
+            container.appendChild(player);
+            currentPlayerId = player.id;
+
+            document.getElementById('playerInfo').innerHTML = `
+                <strong>URL:</strong> ${url}<br>
+                <strong>Player ID:</strong> ${currentPlayerId}<br>
+                <strong>Status:</strong> Playing<br>
+                <strong>Type:</strong> Flash SWF
+            `;
+        }
+
+        function loadExampleFlash(url) {
+            document.getElementById('flashUrl').value = url;
+            loadFlash();
+        }
+
+        function playFlash() {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.play(currentPlayerId);
+                document.getElementById('playerInfo').textContent += '\nState: Playing';
+            }
+        }
+
+        function pauseFlash() {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.pause(currentPlayerId);
+                document.getElementById('playerInfo').textContent += '\nState: Paused';
+            }
+        }
+
+        function stopFlash() {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.stop(currentPlayerId);
+                document.getElementById('playerInfo').textContent += '\nState: Stopped';
+            }
+        }
+
+        function setVolume(value) {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.setVolume(currentPlayerId, value / 100);
+                document.getElementById('volumeDisplay').textContent = value + '%';
+            }
+        }
+
+        function toggleFullscreen() {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.toggleFullscreen(currentPlayerId);
+            }
+        }
+
+        function clearFlash() {
+            if (currentPlayerId && window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.dispose(currentPlayerId);
+            }
+            document.getElementById('playerContainer').innerHTML = '';
+            document.getElementById('playerContainer').classList.add('empty');
+            document.getElementById('playerInfo').textContent = 'No Flash file loaded';
+            currentPlayerId = null;
+        }
+
+        function processPageFlash() {
+            if (window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.processFlashContent();
+                alert('Processed page Flash content');
+            }
+        }
+
+        function showPluginInfo() {
+            if (window.FlashPlayerPlugin) {
+                const info = window.FlashPlayerPlugin.getInfo();
+                alert(JSON.stringify(info, null, 2));
+            }
+        }
+
+        function applySettings() {
+            if (window.FlashPlayerPlugin) {
+                window.FlashPlayerPlugin.configure({
+                    backgroundColor: document.getElementById('bgColorPicker').value,
+                    autoplay: document.getElementById('autoplayCheckbox').checked ? 'on' : 'off',
+                    allowFullscreen: document.getElementById('fullscreenCheckbox').checked
+                });
+                alert('Settings applied');
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePluginStatus();
+            // Check again after 2 seconds
+            setTimeout(updatePluginStatus, 2000);
+        });
+    </script>
+</body>
+</html>
