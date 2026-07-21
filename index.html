@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RetroBrowser - Web Time Machine (1996-2026)</title>
+    <title>RetroBrowser - Real Web Browser with Retro UI</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="retro-styles.css">
+    <link rel="stylesheet" href="clock.css">
 </head>
 <body>
-    <!-- Retro Browser Interface -->
+    <!-- Main Browser Window -->
     <div class="browser-window">
         <!-- Title Bar -->
         <div class="browser-titlebar">
@@ -17,7 +18,7 @@
                 <button class="titlebar-btn maximize" aria-label="Maximize"></button>
                 <button class="titlebar-btn close" aria-label="Close"></button>
             </div>
-            <div class="titlebar-text">RetroBrowser - Web Time Machine</div>
+            <div class="titlebar-text">RetroBrowser - Real Web Browser</div>
         </div>
 
         <!-- Menu Bar -->
@@ -35,20 +36,14 @@
             <button class="nav-btn" id="forwardBtn" title="Forward">▶</button>
             <button class="nav-btn" id="reloadBtn" title="Reload">⟳</button>
             <button class="nav-btn" id="stopBtn" title="Stop">⊗</button>
-            <input type="text" class="address-bar" id="addressBar" placeholder="http://example.com" value="http://www.example.com">
+            <input type="text" class="address-bar" id="addressBar" placeholder="http://example.com" value="https://example.com">
             <button class="nav-btn" id="goBtn" title="Go">Go</button>
         </div>
 
-        <!-- Year Archive Navigation -->
-        <div class="year-selector">
-            <label for="yearSlider">Select Year:</label>
-            <input type="range" id="yearSlider" min="1996" max="2026" value="2024" class="slider">
-            <span id="yearDisplay" class="year-display">2024</span>
-        </div>
-
-        <!-- Archive Timeline -->
-        <div class="timeline-container">
-            <div class="timeline" id="timeline"></div>
+        <!-- World Clock Display -->
+        <div class="world-clock-panel" id="worldClockPanel">
+            <div class="clock-title">🕐 WORLD TIME ZONES</div>
+            <div class="clocks-container" id="clocksContainer"></div>
         </div>
 
         <!-- Main Content Area -->
@@ -58,28 +53,21 @@
             </div>
             
             <div class="content-viewport">
-                <div class="page-content" id="pageContent">
-                    <!-- Archive cards will be inserted here -->
-                    <div class="archive-grid" id="archiveGrid"></div>
+                <div id="pageContent">
+                    <iframe id="browserFrame" src="https://example.com" style="width: 100%; height: 100%; border: none; background: white;"></iframe>
                 </div>
             </div>
         </div>
 
         <!-- Footer Statusbar -->
         <div class="browser-statusbar">
-            <span id="pageInfo">Document: Done - 0 Bytes</span>
+            <span id="pageInfo">Document: Ready</span>
+            <span id="timeStatus" class="time-status">⏰ Loading...</span>
         </div>
     </div>
 
-    <!-- Modal for year details -->
-    <div class="modal" id="yearModal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <!-- Scripts -->
+    <script src="world-clock.js"></script>
+    <script src="real-browser.js"></script>
 </body>
 </html>
